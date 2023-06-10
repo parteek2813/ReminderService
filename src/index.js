@@ -1,19 +1,20 @@
 const express = require("express");
 
 const bodyParser = require("body-parser");
-const cron = require("node-cron");
-
+const TicketController = require("./controllers/ticket-controller");
 const sendBasicEmail = require("./services/email-service");
 
+const jobs = require("./utils/job");
 const PORT = 3004;
 const setupAndStartServer = () => {
   const app = express();
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
 
+  app.post("/api/v1/tickets", TicketController.create);
   app.listen(PORT, () => {
     console.log(`Server started on PORT: ${PORT}`);
-
+    jobs();
     // sendBasicEmail(
     //   "support@admin.com",
     //   "sarcaxx9999@gmail.com",
