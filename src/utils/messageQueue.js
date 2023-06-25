@@ -2,7 +2,7 @@ const amqplib = require("amqplib");
 
 const EXCHANGE_NAME = "AIRLINE_BOOKING";
 const BINDING_KEY = "REMINDER_SERVICE";
-const MESSAGE_BROKER_URL = "ampq://localhost";
+const MESSAGE_BROKER_URL = "amqp://localhost";
 
 const createChannel = async () => {
   try {
