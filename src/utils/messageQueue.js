@@ -31,10 +31,7 @@ const subscribeMessage = async (channel, service, binding_key) => {
       // we can achieve the bifurcation of this logic in a diff way by creating a seprate
       // queue altogether for each microservice
 
-      if (payload.service == "DEMO_SERVICE") {
-        console.log("Call demo service");
-        service.testingQueue(payload);
-      }
+      service(payload);
 
       channel.ack(msg);
     });

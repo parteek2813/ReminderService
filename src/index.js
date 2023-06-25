@@ -3,7 +3,6 @@ const { createChannel, subscribeMessage } = require("./utils/messageQueue");
 
 const bodyParser = require("body-parser");
 const TicketController = require("./controllers/ticket-controller");
-// const sendBasicEmail = require("./services/email-service");
 const EmailService = require("./services/email-service");
 
 const jobs = require("./utils/job");
@@ -20,21 +19,11 @@ const setupAndStartServer = async () => {
   app.post("/api/v1/tickets", TicketController.create);
 
   const channel = await createChannel();
-  subscribeMessage(channel, EmailService, BINDING_KEY);
+  subscribeMessage(channel, EmailService.subcribedEvents, BINDING_KEY);
 
   app.listen(PORT, () => {
     console.log(`Server started on PORT: ${PORT}`);
     jobs();
-    // sendBasicEmail(
-    //   "support@admin.com",
-    //   "sarcaxx9999@gmail.com",
-    //   "This is a testing Email",
-    //   "Hey, how are you, I hope you like the support"
-    // );
-
-    // cron.schedule("*/2 * * * *", () => {
-    //   console.log("running a task every two minutes");
-    // });
   });
 };
 
