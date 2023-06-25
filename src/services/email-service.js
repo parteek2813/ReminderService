@@ -46,9 +46,14 @@ const createNotification = async (data) => {
   }
 };
 
+const testingQueue = async (data) => {
+  console.log("inside service test queue", data);
+};
+
 module.exports = {
   sendBasicEmail,
   fetchPendingEmail,
   createNotification,
   updateTicket,
+  testingQueue,
 };

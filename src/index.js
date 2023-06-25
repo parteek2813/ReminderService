@@ -3,7 +3,8 @@ const { createChannel, subscribeMessage } = require("./utils/messageQueue");
 
 const bodyParser = require("body-parser");
 const TicketController = require("./controllers/ticket-controller");
-const sendBasicEmail = require("./services/email-service");
+// const sendBasicEmail = require("./services/email-service");
+const EmailService = require("./services/email-service");
 
 const jobs = require("./utils/job");
 const BINDING_KEY = "REMINDER_SERVICE";
@@ -19,7 +20,7 @@ const setupAndStartServer = async () => {
   app.post("/api/v1/tickets", TicketController.create);
 
   const channel = await createChannel();
-  subscribeMessage(channel, undefined, BINDING_KEY);
+  subscribeMessage(channel, EmailService, BINDING_KEY);
 
   app.listen(PORT, () => {
     console.log(`Server started on PORT: ${PORT}`);
