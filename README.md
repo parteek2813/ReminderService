@@ -1,0 +1,1 @@
+* This will be the reminder micro-service for the airline project having the role of sending the reminder to each target audience who has booked the flight.
